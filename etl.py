@@ -54,10 +54,10 @@ def process_log_file(cur, filepath):
     t['week'] = t['datetime'].dt.week
     
     # insert time data records
-    time_data = ('ts', 'hour', 'day', 'week', 'month', 'year', 'weekday_name')
+    time_data = ('datetime', 'hour', 'day', 'week', 'month', 'year', 'weekday_name')
     column_labels = ('start_time', 'hour', 'day', 'week', 'month', 'year', 'weekday') 
 
-    time_df = t[['ts', 'hour', 'day', 'week', 'month', 'year', 'weekday_name']]
+    time_df = t[['datetime', 'hour', 'day', 'week', 'month', 'year', 'weekday_name']]
 
 
     for i, row in time_df.iterrows():
@@ -83,7 +83,7 @@ def process_log_file(cur, filepath):
             songid, artistid = None, None
 
         # insert songplay record
-        songplay_data = (row.ts, row.userId, row.level, songid, artistid, row.itemInSession, row.location, row.userAgent)
+        songplay_data = (row.datetime, row.userId, row.level, songid, artistid, row.itemInSession, row.location, row.userAgent)
         cur.execute(songplay_table_insert, songplay_data)
         cur.execute(songplay_table_insert, songplay_data)
 
